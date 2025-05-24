@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初禾本草 - CHUHO HERBS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.alicdn.com/css?family=Alimama+DongFangDaKai');
+        @import url('https://fonts.alicdn.com/css?family=Alibaba+Health+Font+2.0+CN');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+        
+        .hero-container {
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #B73E3E 0%, #8B2635 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .content-container {
+            width: 100%;
+            background: linear-gradient(180deg, #F8F5F0 0%, #FEFBF6 100%);
+            min-height: 100vh;
+            padding: 4rem 0;
+        }
+        
+        .main-title {
+            font-family: 'Alimama DongFangDaKai', 'Noto Serif SC', serif;
+            font-size: clamp(4rem, 12vw, 16rem);
+            color: #F5E6B8;
+            font-weight: normal;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.1;
+        }
+        
+        .english-title {
+            font-family: 'Alimama DongFangDaKai', serif;
+            font-size: clamp(2rem, 6vw, 8rem);
+            color: #F5E6B8;
+            font-weight: normal;
+            letter-spacing: 0.2em;
+            margin-bottom: 4rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-family: 'Alibaba Health Font 2.0 CN', 'Noto Serif SC', sans-serif;
+            font-size: clamp(1.2rem, 3vw, 2.5rem);
+            color: #F5E6B8;
+            font-weight: normal;
+            letter-spacing: 0.15em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .main-title {
+                margin-bottom: 0.6rem;
+            }
+            
+            .english-title {
+                margin-bottom: 3rem;
+                letter-spacing: 0.1em;
+            }
+            
+            .subtitle {
+                letter-spacing: 0.1em;
+                text-align: center;
+                padding: 0 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-title {
+                margin-bottom: 0.4rem;
+            }
+            
+            .english-title {
+                margin-bottom: 2rem;
+            }
+        }
+        
+        /* 产品介绍页面样式 */
+        .product-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .product-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+            border-bottom: 2px solid #D4AF37;
+            position: relative;
+        }
+        
+        .product-header::before {
+            content: '◆';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #D4AF37;
+            font-size: 2rem;
+        }
+        
+        .product-title {
+            font-family: 'Alimama DongFangDaKai', 'Noto Serif SC', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: #8B2635;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .product-subtitle {
+            font-family: 'Alibaba Health Font 2.0 CN', 'Noto Serif SC', sans-serif;
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: #A0522D;
+            letter-spacing: 0.05em;
+        }
+        
+        .section-block {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 25px rgba(139, 38, 53, 0.1);
+            border-left: 5px solid #D4AF37;
+            position: relative;
+        }
+        
+        .section-block::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            background: #D4AF37;
+            transform: rotate(45deg);
+        }
+        
+        .section-title {
+            font-family: 'Alimama DongFangDaKai', 'Noto Serif SC', serif;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #8B2635;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #D4AF37;
+        }
+        
+        .symptoms-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .symptom-item {
+            background: linear-gradient(135deg, #FFF8E7 0%, #FFF5DB 100%);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 3px solid #D4AF37;
+        }
+        
+        .ingredients-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .ingredients-table th,
+        .ingredients-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #E8E8E8;
+        }
+        
+        .ingredients-table th {
+            background: linear-gradient(135deg, #8B2635 0%, #A0522D 100%);
+            color: #F5E6B8;
+            font-family: 'Alimama DongFangDaKai', 'Noto Serif SC', serif;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .benefit-card {
+            background: linear-gradient(135deg, #FFF8E7 0%, #F0E68C 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #D4AF37;
+        }
+        
+        .user-feedback {
+            background: linear-gradient(135deg, #F5F5DC 0%, #FFF8DC 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #D4AF37;
+            font-style: italic;
+        }
+        
+        .product-info {
+            background: linear-gradient(135deg, #8B2635 0%, #A0522D 100%);
+            color: #F5E6B8;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .text-content {
+            font-family: 'Alibaba Health Font 2.0 CN', 'Noto Serif SC', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+        }
+        
+        .highlight {
+            color: #8B2635;
+            font-weight: bold;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 1024px) {
+            .hero-container {
+                padding: 2rem 1rem;
+            }
+            
+            .product-section {
+                padding: 0 1rem;
+            }
+            
+            .section-block {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content-container {
+                padding: 2rem 0;
+            }
+            
+            .ingredients-table {
+                font-size: 0.9rem;
+            }
+            
+            .ingredients-table th,
+            .ingredients-table td {
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero 板块 -->
+    <div class="hero-container">
+        <div class="main-title">初禾本草</div>
+        <div class="english-title">CHUHO HERBS</div>
+        <div class="subtitle">專為女性打造的古方輕養品牌</div>
+    </div>
+
+    <!-- 产品介绍内容 -->
+    <div class="content-container">
+        <div class="product-section">
+            <!-- 产品标题 -->
+            <div class="product-header">
+                <div class="product-title">初禾本草·清湿安</div>
+                <div class="product-subtitle">女性体内湿气调理 · 每天两粒 清爽轻盈</div>
+            </div>
+
+            <!-- 01 湿气困扰 -->
+            <div class="section-block">
+                <h2 class="section-title">01｜你有这些"湿气困扰"吗？</h2>
+                <div class="symptoms-list">
+                    <div class="symptom-item">📌 一觉醒来眼肿脸胀</div>
+                    <div class="symptom-item">📌 常年困乏疲惫、头重脚轻</div>
+                    <div class="symptom-item">📌 一吃就胀，肚子松软没力气</div>
+                    <div class="symptom-item">📌 经期前肿、湿热、冒痘</div>
+                    <div class="symptom-item">📌 食欲差、易胖、气色暗黄</div>
+                </div>
+                <div class="text-content">
+                    <p><span class="highlight">湿气不除，营养难吸收，代谢也跟着变慢</span></p>
+                    <p>从根源祛湿，轻体通畅，才是真正的调理开始</p>
+                </div>
+            </div>
+
+            <!-- 02 古方启源 -->
+            <div class="section-block">
+                <h2 class="section-title">02｜古方启源 · 专为女性体湿打造的日常轻调理</h2>
+                <div class="text-content">
+                    <p>📖 传承宋代《太平惠民和剂局方》 + 《伤寒论》经典祛湿方</p>
+                    <p>🧬 联合现代植物提取技术 + 代谢营养素科学补充</p>
+                    <p>🌿 严选12味药食同源草本，温和祛湿不寒凉</p>
+                </div>
+            </div>
+
+            <!-- 03 核心成分 -->
+            <div class="section-block">
+                <h2 class="section-title">03｜核心成分解析｜草本 × 科学双修体系</h2>
+                <table class="ingredients-table">
+                    <thead>
+                        <tr>
+                            <th>成分</th>
+                            <th>功效</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>白术</td><td>健脾燥湿，增强运化</td></tr>
+                        <tr><td>茯苓</td><td>利水渗湿，兼安神助眠</td></tr>
+                        <tr><td>薏苡仁</td><td>排湿清体，润肤减脂</td></tr>
+                        <tr><td>陈皮</td><td>理气和中，消胀散滞</td></tr>
+                        <tr><td>荷叶</td><td>轻身去腻，改善油腻水肿</td></tr>
+                        <tr><td>赤小豆</td><td>排水祛湿，利小便</td></tr>
+                        <tr><td>厚朴、佩兰</td><td>燥湿化浊，清口气、除胃湿</td></tr>
+                        <tr><td>车前子</td><td>通便利尿，排除湿热</td></tr>
+                        <tr><td>太子参</td><td>补中益气，增强体力</td></tr>
+                        <tr><td>甘草</td><td>调和诸药，护胃护脾</td></tr>
+                    </tbody>
+                </table>
+                <div class="text-content">
+                    <h4>📎营养素协同：</h4>
+                    <ul>
+                        <li>维生素B1 / B6 → 促进糖类代谢，缓解湿重疲劳</li>
+                        <li>维生素C → 抗氧化、增强代谢力</li>
+                        <li>FOS益生元 → 改善肠道环境，助排湿通便</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 04 五大核心价值 -->
+            <div class="section-block">
+                <h2 class="section-title">04｜五大核心价值，为轻体清湿打下基础</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="text-content">✅ 温和祛湿，不寒不燥，适合女性脾虚体质</div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="text-content">✅ 草本复配+营养素协同，代谢与调理双系统激活</div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="text-content">✅ 不腹泻、不依赖，适合长期日常养护</div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="text-content">✅ 一日两粒，轻松开启代谢清道夫模式</div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="text-content">✅ 科学工艺提取，浓缩植物活性，高吸收率</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 05 适用人群 -->
+            <div class="section-block">
+                <h2 class="section-title">05｜适用人群</h2>
+                <div class="text-content">
+                    <p>👩‍💼 上班久坐、运动少、湿重水肿型女性</p>
+                    <p>👩‍🦰 经期前易肿、胸胀、脾胃弱女性</p>
+                    <p>👩‍🦱 久坐湿气积聚、体态偏"湿胖"型</p>
+                    <p>👩‍🔬 减脂代谢期，想要提升燃脂效率的女性</p>
+                    <p>👩‍⚕️ 亚健康/肠胃虚弱/"油皮痘痘"问题伴随湿热者</p>
+                </div>
+            </div>
+
+            <!-- 06 推荐用法 -->
+            <div class="section-block">
+                <h2 class="section-title">06｜推荐用法｜建议服用周期</h2>
+                <div class="text-content">
+                    <p>💊 <strong>剂型：</strong>植物草本胶囊</p>
+                    <p>📅 <strong>服用方法：</strong>每日2次，每次2粒，温水送服</p>
+                    <p>📈 <strong>周期建议：</strong>建议连续服用4周起，调理周期6-12周为佳</p>
+                    <br>
+                    <p class="highlight">🌿 清湿建议搭配：清淡饮食 + 规律作息 + 温水代茶饮，体感更显著</p>
+                </div>
+            </div>
+
+            <!-- 07 用户反馈 -->
+            <div class="section-block">
+                <h2 class="section-title">07｜用户真实反馈节选</h2>
+                <div class="user-feedback">
+                    💬 "以前每天起床都头胀胀的，这个吃了两个礼拜真的有感觉"
+                </div>
+                <div class="user-feedback">
+                    💬 "不是拉肚子那种，是身体慢慢变轻的那种清爽感！"
+                </div>
+                <div class="user-feedback">
+                    💬 "湿气清了后，整个人轻了半斤不止，连皮肤都没那么糟了"
+                </div>
+            </div>
+
+            <!-- 08 品牌理念 -->
+            <div class="section-block">
+                <h2 class="section-title">08｜初禾本草 · 东方草本的现代演绎</h2>
+                <div class="text-content">
+                    <p>✨ 精选药食同源草本</p>
+                    <p>✨ 无激素 / 无依赖 / 无防腐添加</p>
+                    <p>✨ 低温提取 / 科学配伍 / 轻调理可日常</p>
+                </div>
+            </div>
+
+            <!-- 商品规格信息 -->
+            <div class="product-info">
+                <h3>📦 商品规格信息</h3>
+                <div class="text-content">
+                    <p>• <strong>品名：</strong>初禾本草·清湿安</p>
+                    <p>• <strong>类型：</strong>草本植物代谢调理胶囊</p>
+                    <p>• <strong>规格：</strong>500mg × 60粒</p>
+                    <p>• <strong>剂型：</strong>植物胶囊</p>
+                    <p>• <strong>适用人群：</strong>18岁以上女性，湿气偏重者</p>
+                    <p>• <strong>不适人群：</strong>孕期、哺乳期女性（请遵医嘱）</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
