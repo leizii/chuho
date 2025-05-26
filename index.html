@@ -10,6 +10,7 @@
     <style>
         @import url('https://fonts.alicdn.com/css?family=Alimama+DongFangDaKai');
         @import url('https://fonts.alicdn.com/css?family=Alibaba+Health+Font+2.0+CN');
+        @import url('https://fonts.alicdn.com/css?family=Alibaba+Puhuiti+2.0+TC');
         
         * {
             margin: 0;
@@ -38,6 +39,33 @@
             background: linear-gradient(180deg, #F8F5F0 0%, #FEFBF6 100%);
             min-height: 100vh;
             padding: 4rem 0;
+        }
+        
+        /* 产品介绍页面样式 */
+        .product-container {
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #2C1810 0%, #4A2C1A 50%, #6B3E2A 100%);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+            overflow-y: auto;
+            padding: 2rem 0;
+        }
+        
+        .product-content {
+            width: 90%;
+            max-width: 1200px;
+            position: relative;
+            background: rgba(245, 230, 184, 0.05);
+            border: 1px solid rgba(245, 230, 184, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-top: 2rem;
+            padding: 2rem;
+            padding-bottom: 6rem;
         }
         
         .main-title {
@@ -100,15 +128,15 @@
         
         /* 产品介绍页面样式 */
         .product-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+            width: 100%;
+            margin: 0;
+            padding: 0;
         }
         
         .product-header {
             text-align: center;
-            margin-bottom: 4rem;
-            padding: 3rem 0;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
             border-bottom: 2px solid #D4AF37;
             position: relative;
         }
@@ -125,27 +153,30 @@
         
         .product-title {
             font-family: 'Alimama DongFangDaKai', 'Noto Serif SC', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            color: #8B2635;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: #F5E6B8;
             margin-bottom: 1rem;
             letter-spacing: 0.1em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         
         .product-subtitle {
             font-family: 'Alibaba Health Font 2.0 CN', 'Noto Serif SC', sans-serif;
-            font-size: clamp(1rem, 2.5vw, 1.5rem);
-            color: #A0522D;
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: #D4AF37;
             letter-spacing: 0.05em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
         
         .section-block {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(245, 230, 184, 0.1);
             border-radius: 15px;
-            padding: 2.5rem;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 8px 25px rgba(139, 38, 53, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             border-left: 5px solid #D4AF37;
             position: relative;
+            border: 1px solid rgba(245, 230, 184, 0.3);
         }
         
         .section-block::before {
@@ -161,11 +192,12 @@
         
         .section-title {
             font-family: 'Alimama DongFangDaKai', 'Noto Serif SC', serif;
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: #8B2635;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: #F5E6B8;
             margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 1px solid #D4AF37;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
         
         .symptoms-list {
@@ -176,32 +208,37 @@
         }
         
         .symptom-item {
-            background: linear-gradient(135deg, #FFF8E7 0%, #FFF5DB 100%);
+            background: linear-gradient(135deg, rgba(245, 230, 184, 0.15) 0%, rgba(245, 230, 184, 0.25) 100%);
             padding: 1rem;
             border-radius: 10px;
             border-left: 3px solid #D4AF37;
+            border: 1px solid rgba(245, 230, 184, 0.3);
+            backdrop-filter: blur(5px);
         }
         
         .ingredients-table {
             width: 100%;
             border-collapse: collapse;
             margin: 1.5rem 0;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(245, 230, 184, 0.1);
             border-radius: 10px;
             overflow: hidden;
+            border: 1px solid rgba(245, 230, 184, 0.3);
         }
         
         .ingredients-table th,
         .ingredients-table td {
             padding: 1rem;
             text-align: left;
-            border-bottom: 1px solid #E8E8E8;
+            border-bottom: 1px solid rgba(245, 230, 184, 0.3);
+            color: #F5E6B8;
         }
         
         .ingredients-table th {
-            background: linear-gradient(135deg, #8B2635 0%, #A0522D 100%);
+            background: linear-gradient(135deg, #6B3E2A 0%, #8B5A3C 100%);
             color: #F5E6B8;
             font-family: 'Alimama DongFangDaKai', 'Noto Serif SC', serif;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
         
         .benefits-grid {
@@ -212,40 +249,221 @@
         }
         
         .benefit-card {
-            background: linear-gradient(135deg, #FFF8E7 0%, #F0E68C 100%);
+            background: linear-gradient(135deg, rgba(245, 230, 184, 0.2) 0%, rgba(212, 175, 55, 0.3) 100%);
             padding: 1.5rem;
             border-radius: 12px;
             text-align: center;
             border: 2px solid #D4AF37;
+            backdrop-filter: blur(5px);
         }
         
         .user-feedback {
-            background: linear-gradient(135deg, #F5F5DC 0%, #FFF8DC 100%);
+            background: linear-gradient(135deg, rgba(245, 230, 184, 0.15) 0%, rgba(245, 230, 184, 0.25) 100%);
             padding: 1.5rem;
             border-radius: 10px;
             margin: 1rem 0;
             border-left: 4px solid #D4AF37;
+            border: 1px solid rgba(245, 230, 184, 0.3);
             font-style: italic;
+            backdrop-filter: blur(5px);
         }
         
         .product-info {
-            background: linear-gradient(135deg, #8B2635 0%, #A0522D 100%);
+            background: linear-gradient(135deg, #6B3E2A 0%, #8B5A3C 100%);
             color: #F5E6B8;
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
+            border: 1px solid rgba(245, 230, 184, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
         
         .text-content {
             font-family: 'Alibaba Health Font 2.0 CN', 'Noto Serif SC', sans-serif;
             line-height: 1.8;
-            color: #333;
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: #F5E6B8;
+            font-size: clamp(0.85rem, 1.8vw, 1rem);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
         
         .highlight {
-            color: #8B2635;
+            color: #D4AF37;
             font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        /* Hero导航按钮样式 */
+        .hero-navigation {
+            position: absolute;
+            bottom: 3rem;
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-btn {
+            background: rgba(245, 230, 184, 0.2);
+            border: 2px solid #F5E6B8;
+            color: #F5E6B8;
+            padding: 1rem 2rem;
+            font-family: 'Alimama DongFangDaKai', 'Noto Serif SC', serif;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            letter-spacing: 0.1em;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(245, 230, 184, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 230, 184, 0.3);
+        }
+        
+        /* 品牌故事页面样式 */
+        .brand-story-container {
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #2C1810 0%, #4A2C1A 50%, #6B3E2A 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .brand-story-content {
+            width: 90%;
+            height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .brand-logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            z-index: 10;
+        }
+        
+        .logo-image {
+            width: 120px;
+            height: auto;
+            opacity: 0.8;
+        }
+        
+        .logo-tagline {
+            font-family: 'Alimama DongFangDaKai', 'Noto Serif SC', serif;
+            font-size: 0.9rem;
+            color: #F5E6B8;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+        
+        /* 竖版文字容器 */
+        .vertical-text-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 2rem;
+            padding-top: 4rem;
+        }
+        
+        .vertical-text-column {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            height: 80vh;
+            overflow-y: auto;
+            padding: 2rem;
+            background: rgba(245, 230, 184, 0.05);
+            border: 1px solid rgba(245, 230, 184, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+        
+        .brand-title-vertical {
+            font-family: 'Alimama DongFangDaKai', 'Noto Serif SC', serif;
+            font-size: 2.5rem;
+            color: #F5E6B8;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 0.2em;
+            text-align: left;
+            align-self: flex-start;
+        }
+        
+        .brand-subtitle-vertical {
+            font-family: 'Alibaba Health Font 2.0 CN', 'Noto Serif SC', sans-serif;
+            font-size: 1.2rem;
+            color: #D4AF37;
+            margin-bottom: 4rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            letter-spacing: 0.1em;
+            text-align: left;
+            align-self: flex-start;
+        }
+        
+        .story-paragraph {
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-self: flex-start;
+            width: 100%;
+        }
+        
+        .story-text {
+            font-family: 'Alibaba Health Font 2.0 CN', 'Noto Serif SC', sans-serif;
+            font-size: 1rem;
+            color: #F5E6B8;
+            line-height: 2;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            letter-spacing: 0.05em;
+            display: block;
+            text-align: justify;
+            padding: 0 1rem;
+            width: 100%;
+        }
+        
+        /* 返回按钮 */
+        .back-navigation {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+        
+        .back-btn {
+            background: rgba(245, 230, 184, 0.2);
+            border: 2px solid #F5E6B8;
+            color: #F5E6B8;
+            padding: 0.8rem 1.5rem;
+            font-family: 'Alimama DongFangDaKai', 'Noto Serif SC', serif;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            letter-spacing: 0.1em;
+        }
+        
+        .back-btn:hover {
+            background: rgba(245, 230, 184, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 230, 184, 0.3);
         }
         
         /* 响应式调整 */
@@ -254,12 +472,61 @@
                 padding: 2rem 1rem;
             }
             
+            .product-container {
+                padding: 1rem 0;
+            }
+            
+            .product-content {
+                width: 95%;
+                margin-top: 1rem;
+                padding: 1.5rem;
+            }
+            
             .product-section {
-                padding: 0 1rem;
+                padding: 0;
             }
             
             .section-block {
                 padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .brand-story-content {
+                width: 95%;
+                height: 95%;
+            }
+            
+            .vertical-text-container {
+                padding: 1rem;
+                padding-top: 2rem;
+            }
+            
+            .vertical-text-column {
+                height: 75vh;
+                padding: 1.5rem;
+            }
+            
+            .brand-title-vertical {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .story-text {
+                font-size: 0.9rem;
+                padding: 0 0.8rem;
+            }
+            
+            .brand-logo {
+                top: 1rem;
+                left: 1rem;
+            }
+            
+            .logo-image {
+                width: 100px;
+            }
+            
+            .logo-tagline {
+                font-size: 0.8rem;
             }
         }
         
@@ -268,28 +535,265 @@
                 padding: 2rem 0;
             }
             
+            .product-container {
+                padding: 0.5rem 0;
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            .product-content {
+                width: 98%;
+                margin-top: 0.5rem;
+                padding: 1rem;
+                padding-bottom: 5rem;
+                border-radius: 15px;
+            }
+            
+            .product-header {
+                padding: 1rem 0;
+                margin-bottom: 2rem;
+            }
+            
+            .section-block {
+                padding: 1rem;
+                margin-bottom: 1rem;
+                border-radius: 10px;
+            }
+            
             .ingredients-table {
-                font-size: 0.9rem;
+                font-size: 0.8rem;
             }
             
             .ingredients-table th,
             .ingredients-table td {
+                padding: 0.6rem;
+            }
+            
+            .hero-navigation {
+                bottom: 2rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            .brand-story-content {
+                width: 98%;
+                height: 98%;
+            }
+            
+            .vertical-text-container {
+                padding: 0.5rem;
+                padding-top: 1rem;
+            }
+            
+            .vertical-text-column {
+                height: 70vh;
+                padding: 1rem;
+                border-radius: 15px;
+            }
+            
+            .brand-title-vertical {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .story-text {
+                font-size: 0.85rem;
+                padding: 0 0.5rem;
+                line-height: 1.8;
+            }
+            
+            .story-paragraph {
+                margin-bottom: 1.5rem;
+            }
+            
+            .brand-logo {
+                top: 0.5rem;
+                left: 0.5rem;
+            }
+            
+            .logo-image {
+                width: 70px;
+            }
+            
+            .logo-tagline {
+                font-size: 0.6rem;
+                margin-top: 0.2rem;
+            }
+            
+            .back-navigation {
+                bottom: 1rem;
+            }
+            
+            .back-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .brand-story-container {
+                padding: 0.5rem;
+            }
+            
+            .vertical-text-column {
+                height: 65vh;
                 padding: 0.8rem;
+                border-radius: 10px;
+            }
+            
+            .brand-title-vertical {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+            
+            .story-text {
+                font-size: 0.8rem;
+                padding: 0 0.3rem;
+                line-height: 1.6;
+            }
+            
+            .story-paragraph {
+                margin-bottom: 1rem;
+            }
+            
+            .product-content {
+                padding: 0.8rem;
+                padding-bottom: 4rem;
+                border-radius: 10px;
+            }
+            
+            .product-header {
+                padding: 0.8rem 0;
+                margin-bottom: 1.5rem;
+            }
+            
+            .section-block {
+                padding: 0.8rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            .ingredients-table {
+                font-size: 0.75rem;
+            }
+            
+            .ingredients-table th,
+            .ingredients-table td {
+                padding: 0.5rem;
+            }
+            
+            .logo-image {
+                width: 60px;
+            }
+            
+            .logo-tagline {
+                font-size: 0.55rem;
+            }
+            
+            .back-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
     <!-- Hero 板块 -->
-    <div class="hero-container">
+    <div class="hero-container" id="hero-section">
         <div class="main-title">初禾本草</div>
         <div class="english-title">CHUHO HERBS</div>
         <div class="subtitle">專為女性打造的古方輕養品牌</div>
+        
+        <!-- 导航按钮 -->
+        <div class="hero-navigation">
+            <button class="nav-btn" onclick="showBrandStory()">品牌故事</button>
+            <button class="nav-btn" onclick="showProducts()">产品介绍</button>
+        </div>
+    </div>
+
+    <!-- 品牌故事页面 -->
+    <div class="brand-story-container" id="brand-story-section" style="display: none;">
+        <div class="brand-story-content">
+            <!-- LOGO -->
+            <div class="brand-logo">
+                <img src="11031748184859_.pic_hd-removebg-preview.png" alt="初禾本草 LOGO" class="logo-image">
+                <div class="logo-tagline">调养于本，轻盈于心</div>
+            </div>
+            
+            <!-- 竖版文字内容 -->
+            <div class="vertical-text-container">
+                <div class="vertical-text-column">
+                    <div class="brand-title-vertical">初禾本草 品牌故事</div>
+                    
+                    <div class="story-paragraph">
+                        <span class="story-text">在千年前的药香里，古籍中的草本之方悄然传承。</span>
+                        <span class="story-text">《太平惠民和剂局方》《金匮要略》《傅青主女科》……这些镌刻在纸上的医理智慧，曾默默守护着东方女子的四季调和与身心和谐。</span>
+                    </div>
+                    
+                    <div class="story-paragraph">
+                        <span class="story-text">初禾本草，正是这份传承的延续。</span>
+                    </div>
+                    
+                    <div class="story-paragraph">
+                        <span class="story-text">我们走进千年本草典籍，从一味白术、一枚酸枣仁，到一盏四物汤、一方逍遥散，萃取出古人"调于本"的养身哲思；又回望现代女性快节奏、强压力、易失衡的生活图景，以科学之眼重新解构"气、血、水、神"四大调理系统，用营养素与科技工艺给予草本新的生命力。</span>
+                    </div>
+                    
+                    <div class="story-paragraph">
+                        <span class="story-text">于是，一颗颗胶囊之间，东方本草与现代科学交融重塑。</span>
+                    </div>
+                    
+                    <div class="story-paragraph">
+                        <span class="story-text">我们坚持：</span>
+                        <span class="story-text">用药食同源的温和本草，调理女性体质不寒不燥；</span>
+                        <span class="story-text">用现代营养素加持，激活代谢通道、疏解压力、唤醒轻盈；</span>
+                        <span class="story-text">用周期分型思维，贴近每位女性不同节律与体感需求；</span>
+                        <span class="story-text">用低温包埋、微粉化提取等科技工艺，还原本草活性，确保每一次调理都可被感知。</span>
+                    </div>
+                    
+                    <div class="story-paragraph">
+                        <span class="story-text">在初禾本草，每一款产品，都是一个"古方+科学"的调养答卷：</span>
+                        <span class="story-text">清湿安祛湿醒代谢，悦月清舒经调气血，静心安安神助眠情绪稳，悦体轻通便排浊轻身心。四方同调，四季轻养。</span>
+                    </div>
+                    
+                    <div class="story-paragraph">
+                        <span class="story-text">我们相信，古方并非停留在历史，而是一场延续千年的生活智慧；</span>
+                        <span class="story-text">我们也相信，调理不该是苦口艰难，而是一种温柔而真实的日常疗愈。</span>
+                    </div>
+                    
+                    <div class="story-paragraph">
+                        <span class="story-text">初禾，意为初生的谷禾，象征本草初发、生命回春。</span>
+                        <span class="story-text">在一粒粒胶囊的温润包裹中，唤醒每位女性身心深处的那份自然韵律与自在轻盈。</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 返回按钮 -->
+            <div class="back-navigation">
+                <button class="back-btn" onclick="showHero()">返回首页</button>
+            </div>
+        </div>
+        </div>
     </div>
 
     <!-- 产品介绍内容 -->
-    <div class="content-container">
-        <div class="product-section">
+    <div class="product-container" id="products-section" style="display: none;">
+        <div class="product-content">
+            <!-- LOGO -->
+            <div class="brand-logo">
+                <img src="11031748184859_.pic_hd-removebg-preview.png" alt="初禾本草 LOGO" class="logo-image">
+                <div class="logo-tagline">调养于本，轻盈于心</div>
+            </div>
+            
+            <!-- 返回按钮 -->
+            <div class="back-navigation">
+                <button class="back-btn" onclick="showHero()">返回首页</button>
+            </div>
+            
+            <div class="product-section">
             <!-- 产品标题 -->
             <div class="product-header">
                 <div class="product-title">初禾本草·清湿安</div>
@@ -439,5 +943,31 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // 页面切换函数
+        function showBrandStory() {
+            document.getElementById('hero-section').style.display = 'none';
+            document.getElementById('products-section').style.display = 'none';
+            document.getElementById('brand-story-section').style.display = 'flex';
+        }
+        
+        function showProducts() {
+            document.getElementById('hero-section').style.display = 'none';
+            document.getElementById('brand-story-section').style.display = 'none';
+            document.getElementById('products-section').style.display = 'flex';
+        }
+        
+        function showHero() {
+            document.getElementById('brand-story-section').style.display = 'none';
+            document.getElementById('products-section').style.display = 'none';
+            document.getElementById('hero-section').style.display = 'flex';
+        }
+        
+        // 页面加载时默认显示Hero
+        window.addEventListener('load', function() {
+            showHero();
+        });
+    </script>
 </body>
 </html> 
