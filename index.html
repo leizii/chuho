@@ -56,6 +56,31 @@
             position: relative;
         }
         
+        /* Hero页面LOGO样式 */
+        .hero-logo {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            z-index: 10;
+        }
+        
+        .hero-logo-image {
+            width: 120px;
+            height: auto;
+            opacity: 0.9;
+        }
+        
+        .hero-logo-tagline {
+            font-family: 'ChillJinshuSong', 'Noto Serif TC', serif;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #F5E6B8;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+        
         .content-container {
             width: 100%;
             background: linear-gradient(180deg, #F8F5F0 0%, #FEFBF6 100%);
@@ -575,6 +600,19 @@
             .logo-tagline {
                 font-size: 0.8rem;
             }
+            
+            .hero-logo {
+                top: 25px;
+                left: 25px;
+            }
+            
+            .hero-logo-image {
+                width: 100px;
+            }
+            
+            .hero-logo-tagline {
+                font-size: 0.8rem;
+            }
         }
         
         @media (max-width: 768px) {
@@ -682,6 +720,19 @@
                 margin-top: 0.2rem;
             }
             
+            .hero-logo {
+                top: 20px;
+                left: 20px;
+            }
+            
+            .hero-logo-image {
+                width: 80px;
+            }
+            
+            .hero-logo-tagline {
+                font-size: 0.7rem;
+            }
+            
             .back-navigation {
                 bottom: 20px;
                 right: 20px;
@@ -754,6 +805,19 @@
                 font-size: 0.55rem;
             }
             
+            .hero-logo {
+                top: 15px;
+                left: 15px;
+            }
+            
+            .hero-logo-image {
+                width: 70px;
+            }
+            
+            .hero-logo-tagline {
+                font-size: 0.6rem;
+            }
+            
             .back-btn {
                 padding: 0.5rem 0.8rem;
                 font-size: 0.8rem;
@@ -777,6 +841,12 @@
 <body>
     <!-- Hero 板块 -->
     <div class="hero-container" id="hero-section">
+        <!-- Hero页面LOGO -->
+        <div class="hero-logo">
+            <img src="11031748184859_.pic_hd-removebg-preview.png" alt="初禾本草 LOGO" class="hero-logo-image">
+            <div class="hero-logo-tagline">調養於本，輕盈於心</div>
+        </div>
+        
         <div class="main-title">初禾本草</div>
         <div class="english-title">CHUHO HERBS</div>
         <div class="subtitle">專為女性打造的古方輕養品牌</div>
