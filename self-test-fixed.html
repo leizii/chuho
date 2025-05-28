@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初禾本草·清湿安 女性湿气体质自测问卷</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* 湿气自测页面样式 */
+        .self-test-container {
+            width: 100vw;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #B73E3E 0%, #8B2635 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow-y: auto;
+            padding: 2rem 0;
+        }
+        
+        .self-test-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+            z-index: 10;
+        }
+        
+        .self-test-logo-image {
+            width: 100px;
+            height: auto;
+            opacity: 0.9;
+        }
+        
+        .self-test-logo-tagline {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #F5E6B8;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+        
+        .self-test-content {
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-top: 0;
+            padding: 2rem;
+            padding-bottom: 6rem;
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #FFD700;
+        }
+        
+        .test-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: #F5E6B8;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .test-subtitle {
+            font-family: 'Noto Serif SC', sans-serif;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: #FFD700;
+            letter-spacing: 0.05em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            line-height: 1.6;
+        }
+        
+        .question-container {
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border-left: 4px solid #FFD700;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .question-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1rem;
+            color: #FFD700;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .question-text {
+            font-family: 'Noto Serif SC', sans-serif;
+            font-size: 1rem;
+            color: #F5E6B8;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .answer-options {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .answer-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: #F5E6B8;
+            padding: 0.8rem 1.5rem;
+            font-family: 'Noto Serif SC', sans-serif;
+            font-size: 0.9rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            letter-spacing: 0.05em;
+            min-width: 80px;
+        }
+        
+        .answer-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: #FFD700;
+        }
+        
+        .answer-btn.selected {
+            background: #FFD700;
+            border-color: #FFD700;
+            color: #8B2635;
+            font-weight: bold;
+        }
+        
+        .test-progress {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .progress-text {
+            font-family: 'Noto Serif SC', sans-serif;
+            color: #FFD700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FFD700 0%, #FFF8DC 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        
+        .test-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(245, 230, 184, 0.3);
+        }
+        
+        .nav-test-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid #F5E6B8;
+            color: #F5E6B8;
+            padding: 0.8rem 1.5rem;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            letter-spacing: 0.1em;
+        }
+        
+        .nav-test-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .nav-test-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* 结果页面样式 */
+        .result-container {
+            text-align: center;
+        }
+        
+        .result-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: #F5E6B8;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.1em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .result-description {
+            font-family: 'Noto Serif SC', sans-serif;
+            font-size: 1.1rem;
+            color: #FFD700;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .recommendation-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 215, 0, 0.3) 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            border: 2px solid #FFD700;
+            backdrop-filter: blur(5px);
+            text-align: left;
+        }
+        
+        .recommendation-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.4rem;
+            color: #F5E6B8;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            font-weight: bold;
+        }
+        
+        .recommendation-text {
+            font-family: 'Noto Serif SC', sans-serif;
+            font-size: 1rem;
+            color: #F5E6B8;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .symptoms-list {
+            margin-bottom: 1.5rem;
+        }
+        
+        .symptom-item {
+            font-family: 'Noto Serif SC', sans-serif;
+            font-size: 0.95rem;
+            color: #F5E6B8;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
+        
+        .product-info-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .product-name {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1rem;
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .product-title-highlight {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.2rem;
+            color: #F5E6B8;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .product-details {
+            margin-bottom: 1rem;
+        }
+        
+        .detail-item {
+            font-family: 'Noto Serif SC', sans-serif;
+            font-size: 0.9rem;
+            color: #F5E6B8;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .detail-item strong {
+            color: #FFD700;
+        }
+        
+        .product-slogan {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1rem;
+            color: #FFD700;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .product-link-btn {
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.05em;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .product-link-btn.primary {
+            background: #FFD700;
+            color: #8B2635;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+        
+        .product-link-btn.primary:hover {
+            background: #FFF8DC;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+        
+        .product-link-btn.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: #F5E6B8;
+            border: 2px solid #FFD700;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+        
+        .product-link-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+        }
+        
+        .back-navigation {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid #F5E6B8;
+            color: #F5E6B8;
+            padding: 0.8rem 1.5rem;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            letter-spacing: 0.1em;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .self-test-content {
+                width: 98%;
+                padding: 1rem;
+                padding-bottom: 5rem;
+            }
+            
+            .answer-options {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .answer-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .test-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-test-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .self-test-logo-image {
+                width: 80px;
+            }
+            
+            .self-test-logo-tagline {
+                font-size: 0.8rem;
+            }
+            
+            .question-container {
+                padding: 1rem;
+            }
+            
+            .test-title {
+                font-size: 1.3rem;
+            }
+            
+            .test-subtitle {
+                font-size: 0.85rem;
+            }
+            
+            .recommendation-card {
+                padding: 1.5rem;
+            }
+            
+            .recommendation-title {
+                font-size: 1.2rem;
+            }
+            
+            .product-info-section {
+                padding: 1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .product-link-btn {
+                min-width: auto;
+                padding: 0.7rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .self-test-logo-image {
+                width: 70px;
+            }
+            
+            .self-test-logo-tagline {
+                font-size: 0.6rem;
+            }
+            
+            .question-container {
+                padding: 1rem;
+            }
+            
+            .test-title {
+                font-size: 1.3rem;
+            }
+            
+            .test-subtitle {
+                font-size: 0.85rem;
+            }
+            
+            .recommendation-card {
+                padding: 1rem;
+            }
+            
+            .recommendation-title {
+                font-size: 1.1rem;
+            }
+            
+            .product-info-section {
+                padding: 0.8rem;
+            }
+            
+            .product-title-highlight {
+                font-size: 1.1rem;
+            }
+            
+            .detail-item {
+                font-size: 0.85rem;
+            }
+            
+            .product-link-btn {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="self-test-container">
+        <!-- 自测页面LOGO -->
+        <div class="self-test-logo">
+            <img src="11031748184859_.pic_hd-removebg-preview.png" alt="初禾本草 LOGO" class="self-test-logo-image">
+            <div class="self-test-logo-tagline">調養於本，輕盈於心</div>
+        </div>
+        
+        <div class="self-test-content">
+            <!-- 返回按钮 -->
+            <div class="back-navigation">
+                <button class="back-btn" onclick="window.location.href='index.html'">返回首页</button>
+            </div>
+            
+            <!-- 测试标题 -->
+            <div class="test-header">
+                <div class="test-title">初禾本草·清湿安 女性湿气体质自测问卷</div>
+                <div class="test-subtitle">
+                    请根据您最近1个月的身体状况判断以下描述是否符合您的情况。<br>
+                    每题请选择"是"或"否"，系统将自动推荐适合您的调理版本。
+                </div>
+            </div>
+            
+            <!-- 进度条 -->
+            <div class="test-progress">
+                <div class="progress-text">测试进度：<span id="current-question">1</span> / 16</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+            
+            <!-- 问题容器 -->
+            <div id="question-area">
+                <!-- 问题将通过JavaScript动态生成 -->
+            </div>
+            
+            <!-- 导航按钮 -->
+            <div class="test-navigation">
+                <button class="nav-test-btn" id="prev-btn" onclick="previousQuestion()" disabled>上一题</button>
+                <button class="nav-test-btn" id="next-btn" onclick="nextQuestion()" disabled>下一题</button>
+                <button class="nav-test-btn" id="submit-btn" onclick="submitTest()" style="display: none;">查看结果</button>
+            </div>
+            
+            <!-- 结果页面 -->
+            <div id="result-area" style="display: none;">
+                <div class="result-container">
+                    <div class="result-title" id="result-title"></div>
+                    <div class="result-description" id="result-description"></div>
+                    <div id="recommendation-cards"></div>
+                    <button class="nav-test-btn" onclick="restartTest()">重新测试</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 湿气自测问题数据
+        const questions = [
+            { id: 1, text: "早上起床时经常感到眼睛浮肿、脸部肿胀", category: "浮肿" },
+            { id: 2, text: "身体经常感到沉重、疲倦，四肢无力", category: "标准" },
+            { id: 3, text: "舌苔厚腻，口中有黏腻感", category: "标准" },
+            { id: 4, text: "大便黏腻不成形，排便后仍有不尽感", category: "标准" },
+            { id: 5, text: "小腿、脚踝容易水肿，按压有凹陷", category: "浮肿" },
+            { id: 6, text: "经常感到胸闷、腹胀，食欲不振", category: "标准" },
+            { id: 7, text: "皮肤油腻，容易长痘痘或湿疹", category: "湿热" },
+            { id: 8, text: "月经前后身体浮肿明显加重", category: "浮肿" },
+            { id: 9, text: "经常感到口苦、口臭，或口干但不想喝水", category: "湿热" },
+            { id: 10, text: "怕冷，手脚经常冰凉", category: "虚湿" },
+            { id: 11, text: "容易腹泻，特别是吃凉食后", category: "虚湿" },
+            { id: 12, text: "白带量多，质地黏稠", category: "标准" },
+            { id: 13, text: "经常便秘，大便干结难排", category: "湿热" },
+            { id: 14, text: "容易感冒，抵抗力较弱", category: "虚湿" },
+            { id: 15, text: "睡眠质量差，多梦易醒", category: "标准" },
+            { id: 16, text: "情绪容易烦躁，压力大时症状加重", category: "湿热" }
+        ];
+
+        // 测试状态
+        let currentQuestionIndex = 0;
+        let answers = {};
+
+        // 初始化测试
+        function initializeTest() {
+            currentQuestionIndex = 0;
+            answers = {};
+            document.getElementById('question-area').style.display = 'block';
+            document.getElementById('result-area').style.display = 'none';
+            showQuestion(0);
+            updateProgress();
+            updateNavigation();
+        }
+
+        // 显示问题
+        function showQuestion(index) {
+            const question = questions[index];
+            const questionArea = document.getElementById('question-area');
+            
+            questionArea.innerHTML = `
+                <div class="question-container">
+                    <div class="question-number">第 ${index + 1} 题</div>
+                    <div class="question-text">${question.text}</div>
+                    <div class="answer-options">
+                        <button class="answer-btn ${answers[index] === true ? 'selected' : ''}" onclick="selectAnswer(${index}, true)">是</button>
+                        <button class="answer-btn ${answers[index] === false ? 'selected' : ''}" onclick="selectAnswer(${index}, false)">否</button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('current-question').textContent = index + 1;
+        }
+
+        // 选择答案
+        function selectAnswer(questionIndex, answer) {
+            answers[questionIndex] = answer;
+            
+            // 更新按钮样式
+            const buttons = document.querySelectorAll('.answer-btn');
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            event.target.classList.add('selected');
+            
+            // 延迟自动跳转到下一题或提交测试
+            setTimeout(() => {
+                if (currentQuestionIndex < questions.length - 1) {
+                    // 如果不是最后一题，自动跳转到下一题
+                    nextQuestion();
+                } else {
+                    // 如果是最后一题，自动提交测试
+                    submitTest();
+                }
+            }, 500); // 延迟500毫秒，让用户看到选择效果
+            
+            updateNavigation();
+        }
+
+        // 更新进度条
+        function updateProgress() {
+            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+        }
+
+        // 更新导航按钮
+        function updateNavigation() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const submitBtn = document.getElementById('submit-btn');
+            
+            prevBtn.disabled = currentQuestionIndex === 0;
+            
+            // 隐藏下一题和查看结果按钮，因为现在是自动跳转
+            nextBtn.style.display = 'none';
+            submitBtn.style.display = 'none';
+        }
+
+        // 上一题
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion(currentQuestionIndex);
+                updateProgress();
+                updateNavigation();
+            }
+        }
+
+        // 下一题
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1 && answers[currentQuestionIndex] !== undefined) {
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex);
+                updateProgress();
+                updateNavigation();
+            }
+        }
+
+        // 提交测试
+        function submitTest() {
+            if (answers[currentQuestionIndex] !== undefined) {
+                calculateResults();
+                showResults();
+            }
+        }
+
+        // 计算结果
+        function calculateResults() {
+            const scores = {
+                "标准": 0,
+                "虚湿": 0,
+                "湿热": 0,
+                "浮肿": 0
+            };
+
+            // 统计各类型得分
+            questions.forEach((question, index) => {
+                if (answers[index] === true) {
+                    scores[question.category]++;
+                }
+            });
+
+            // 找出得分最高的类型
+            let maxScore = 0;
+            let recommendedType = "标准";
+            
+            Object.keys(scores).forEach(type => {
+                if (scores[type] > maxScore) {
+                    maxScore = scores[type];
+                    recommendedType = type;
+                } else if (scores[type] === maxScore && scores[type] >= 2) {
+                    // 如果得分相同且≥2，优先推荐虚湿型
+                    if (type === "虚湿") {
+                        recommendedType = "虚湿";
+                    }
+                }
+            });
+
+            // 如果所有得分都小于2，推荐标准版
+            if (maxScore < 2) {
+                recommendedType = "标准";
+            }
+
+            return { scores, recommendedType, maxScore };
+        }
+
+        // 显示结果
+        function showResults() {
+            const result = calculateResults();
+            const { scores, recommendedType, maxScore } = result;
+            
+            document.getElementById('question-area').style.display = 'none';
+            document.getElementById('result-area').style.display = 'block';
+            
+            // 隐藏测试导航按钮
+            document.querySelector('.test-navigation').style.display = 'none';
+            
+            // 设置结果标题和描述
+            const resultTitle = document.getElementById('result-title');
+            const resultDescription = document.getElementById('result-description');
+            
+            resultTitle.textContent = `测试完成！推荐：清湿安·${getTypeDisplayName(recommendedType)}`;
+            
+            let description = `建议您选择清湿安·${getTypeDisplayName(recommendedType)}进行调理。`;
+            
+            resultDescription.innerHTML = description;
+            
+            // 生成推荐卡片
+            generateRecommendationCard(recommendedType);
+        }
+
+        // 获取类型显示名称
+        function getTypeDisplayName(type) {
+            const displayNames = {
+                "标准": "标准版",
+                "虚湿": "虚湿版", 
+                "湿热": "湿热版",
+                "浮肿": "浮肿版"
+            };
+            return displayNames[type] || "标准版";
+        }
+
+        // 生成推荐卡片
+        function generateRecommendationCard(type) {
+            const recommendations = {
+                "标准": {
+                    icon: "🌿",
+                    title: "日常湿重型 · 气滞困倦体",
+                    description: "你属于日常代谢型湿气体质，常见于：",
+                    symptoms: [
+                        "易疲劳、精神差、饭后发困",
+                        "舌苔厚腻、口中异味", 
+                        "肠胃吸收差、易水肿、易增重"
+                    ],
+                    product: "初禾本草·清湿安｜标准版",
+                    effect: "健脾祛湿 + 温和代谢调理",
+                    ingredients: "白术、茯苓、薏苡仁、荷叶、陈皮",
+                    suitable: "日常代谢慢、湿重体虚女性",
+                    slogan: "每日两粒，开启轻养新日常",
+                    buttons: ["查看标准版配方", "加入购物车享优惠"]
+                },
+                "虚湿": {
+                    icon: "❄️",
+                    title: "虚湿型 · 寒湿困脾体",
+                    description: "你属于体寒脾虚型湿气体质，常见于：",
+                    symptoms: [
+                        "怕冷、手脚凉、易感冒",
+                        "吃凉易腹泻、体力差、免疫低",
+                        "气色偏白、疲倦、舌苔厚"
+                    ],
+                    product: "初禾本草·清湿安｜虚湿版",
+                    effect: "温阳健脾 + 祛寒祛湿",
+                    ingredients: "黄芪、干姜、白术、太子参、茯苓",
+                    suitable: "体寒虚弱、湿气重、长期怕冷者",
+                    slogan: "暖中排湿，扶正驱寒，调出元气",
+                    buttons: ["查看虚湿版详情", "联系顾问定制周期方案"]
+                },
+                "湿热": {
+                    icon: "🔥",
+                    title: "湿热型 · 内湿上火体",
+                    description: "你属于湿热内蕴型湿气体质，常见于：",
+                    symptoms: [
+                        "口苦口干、口气重",
+                        "面部油脂旺、易痘、粉刺",
+                        "大便干、便秘、舌苔黄腻"
+                    ],
+                    product: "初禾本草·清湿安｜湿热版",
+                    effect: "清热化湿 + 通腑排毒",
+                    ingredients: "佩兰、厚朴、栀子、黄连、陈皮",
+                    suitable: "体内湿热郁结、易上火、排毒差人群",
+                    slogan: "清湿不伤脾，祛热不上火",
+                    buttons: ["前往湿热版产品页", "咨询适合的调理周期"]
+                },
+                "浮肿": {
+                    icon: "🌊",
+                    title: "浮肿型 · 水湿困体",
+                    description: "你属于水湿停滞型湿气体质，常见于：",
+                    symptoms: [
+                        "晨起眼肿、腿脚浮肿",
+                        "喝水易胀，月经期更明显",
+                        "面部水润却不通透，体态沉重"
+                    ],
+                    product: "初禾本草·清湿安｜浮肿版",
+                    effect: "利水渗湿 + 通便清肠",
+                    ingredients: "泽泻、车前草、赤小豆、薏苡仁、茯苓",
+                    suitable: "面部浮肿、小腿按压易陷、代谢缓慢人群",
+                    slogan: "轻盈代谢，从排水开始",
+                    buttons: ["立即查看产品详情", "咨询调理方案"]
+                }
+            };
+            
+            const recommendation = recommendations[type];
+            const cardsContainer = document.getElementById('recommendation-cards');
+            
+            cardsContainer.innerHTML = `
+                <div class="recommendation-card">
+                    <div class="recommendation-title">${recommendation.icon} ${recommendation.title}</div>
+                    <div class="recommendation-text">${recommendation.description}</div>
+                    <div class="symptoms-list">
+                        ${recommendation.symptoms.map(symptom => `<div class="symptom-item">• ${symptom}</div>`).join('')}
+                    </div>
+                    
+                    <div class="product-info-section">
+                        <div class="product-name">💡 推荐使用：</div>
+                        <div class="product-title-highlight">${recommendation.product}</div>
+                        
+                        <div class="product-details">
+                            <div class="detail-item"><strong>核心功效：</strong>${recommendation.effect}</div>
+                            <div class="detail-item"><strong>精选成分：</strong>${recommendation.ingredients}</div>
+                            <div class="detail-item"><strong>适合人群：</strong>${recommendation.suitable}</div>
+                        </div>
+                        
+                        <div class="product-slogan">👉 ${recommendation.slogan}</div>
+                        
+                        <div class="action-buttons">
+                            <button class="product-link-btn primary" onclick="goToProduct('${type}', 0)">${recommendation.buttons[0]}</button>
+                            <button class="product-link-btn secondary" onclick="goToProduct('${type}', 1)">${recommendation.buttons[1]}</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 跳转到产品页面
+        function goToProduct(type, buttonIndex) {
+            const recommendations = {
+                "标准": ["查看标准版配方", "加入购物车享优惠"],
+                "虚湿": ["查看虚湿版详情", "联系顾问定制周期方案"],
+                "湿热": ["前往湿热版产品页", "咨询适合的调理周期"],
+                "浮肿": ["立即查看产品详情", "咨询调理方案"]
+            };
+            
+            const buttonText = recommendations[type][buttonIndex];
+            // 这里可以添加跳转到具体产品页面的逻辑
+            alert(`${buttonText} - 清湿安·${getTypeDisplayName(type)}`);
+        }
+
+        // 重新测试
+        function restartTest() {
+            // 重新显示测试导航按钮
+            document.querySelector('.test-navigation').style.display = 'flex';
+            initializeTest();
+        }
+        
+        // 页面加载时初始化测试
+        window.addEventListener('load', function() {
+            console.log('湿气自测页面加载完成');
+            initializeTest();
+        });
+        
+        // 添加错误处理
+        window.addEventListener('error', function(e) {
+            console.error('页面错误:', e.error);
+        });
+    </script>
+</body>
+</html> 
